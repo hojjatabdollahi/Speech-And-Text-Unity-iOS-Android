@@ -14,6 +14,9 @@ android {
     }
     productFlavors {
     }
+    lint {
+        baseline = file("lint-baseline.xml")
+    }
 }
 
 dependencies {
@@ -31,10 +34,10 @@ task deleteOldJar(type: Delete) {
 
 //task to export content as jar
 task exportJar(type: Copy) {
-    from('build/intermediates/bundles/release/')
+    from('build/intermediates/full_jar/debug/')
     into('release/')
-    include('classes.jar')
-    rename('classes.jar', 'SpeechToTextPlugin.jar')
+    include('full.jar')
+    rename('full.jar', 'SpeechToTextPlugin.jar')
 }
 
 exportJar.dependsOn(deleteOldJar, build)
